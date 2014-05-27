@@ -9,4 +9,18 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-TwitterOk::Application.config.secret_key_base = 'f165a2ed5d2c9a4e7971fda0a5c8f07f4185cc8357db06506beb586a4c6c0d4e269d47ad45a8758eca8b949fdc4edac33590236de439508a65442f13689819b1'
+
+require 'securerandom'
+
+def secure_token
+  token_file = Rails.root.join('.secret')
+  if File.exist?(token_file)
+    File.read(token_file).chomp
+  else
+    token = SecureRandom.hex(64)
+    File.write(token_file, token)
+    token
+  end
+end
+
+TwitterOk::Application.config.secret_key_base = secure_token
