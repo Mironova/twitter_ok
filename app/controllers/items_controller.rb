@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    p params
-    render text: "Item created"
+    @item = Item.create(params[:item])
+    render text: "#{@item.id}: #{@item.name} (#{!@item.new_record?})"
   end
 end
