@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140526052720) do
+ActiveRecord::Schema.define(version: 20140606001104) do
 
   create_table "items", force: true do |t|
     t.float    "price"
@@ -25,5 +25,15 @@ ActiveRecord::Schema.define(version: 20140526052720) do
 
   add_index "items", ["name"], name: "index_items_on_name"
   add_index "items", ["price"], name: "index_items_on_price"
+
+  create_table "users", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "password_digest"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
 
 end
