@@ -5,9 +5,12 @@ html
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
-  body class="site"
+  body.site
     = render 'layouts/header'
-    main class="site-content" style="padding-top: 30px;"
+    main.site-content.container style="padding: 50px 0;"
+      - flash.each do |key, value|
+        = content_tag(:div, value, class: "alert alert-#{key}")
       = yield
     = render 'layouts/footer'
+    = debug(params) if Rails.env.development?
 
